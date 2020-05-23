@@ -194,8 +194,8 @@
 		B68303032478F710000F72B1 /* Github */ = {
 			isa = PBXGroup;
 			children = (
-				B683030C247906A1000F72B1 /* GithubAPI.swift */,
-				B683030E24790F8F000F72B1 /* GithubModel.swift */,
+				B6830322247960E6000F72B1 /* Utility */,
+				B6830323247960EE000F72B1 /* Model */,
 				B683031324794414000F72B1 /* GithubTableCell */,
 				B68303052478F725000F72B1 /* Rx */,
 				B68303042478F71B000F72B1 /* NoRx */,
@@ -255,6 +255,22 @@
 				B683031624794430000F72B1 /* GithubTableViewCell.swift */,
 			);
 			path = GithubTableCell;
+			sourceTree = "<group>";
+		};
+		B6830322247960E6000F72B1 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				B683030C247906A1000F72B1 /* GithubAPI.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		B6830323247960EE000F72B1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B683030E24790F8F000F72B1 /* GithubModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
