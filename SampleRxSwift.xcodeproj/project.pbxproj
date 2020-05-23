@@ -194,11 +194,11 @@
 		B68303032478F710000F72B1 /* Github */ = {
 			isa = PBXGroup;
 			children = (
-				B6830322247960E6000F72B1 /* Utility */,
+				B6830325247979A0000F72B1 /* Controller */,
 				B6830323247960EE000F72B1 /* Model */,
-				B683031324794414000F72B1 /* GithubTableCell */,
-				B68303052478F725000F72B1 /* Rx */,
-				B68303042478F71B000F72B1 /* NoRx */,
+				B6830322247960E6000F72B1 /* Utility */,
+				B683032424797994000F72B1 /* View */,
+				B6830326247979AE000F72B1 /* ViewModel */,
 			);
 			path = Github;
 			sourceTree = "<group>";
@@ -226,7 +226,6 @@
 			children = (
 				B6830318247945D4000F72B1 /* RxGithubSearchMVVM.storyboard */,
 				B683031A247945DB000F72B1 /* RxGithubSearchMVVMViewController.swift */,
-				B683031C24794650000F72B1 /* RxGithubSearchMVVMViewModel.swift */,
 			);
 			path = MVVM;
 			sourceTree = "<group>";
@@ -271,6 +270,31 @@
 				B683030E24790F8F000F72B1 /* GithubModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B683032424797994000F72B1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B683031324794414000F72B1 /* GithubTableCell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B6830325247979A0000F72B1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B68303052478F725000F72B1 /* Rx */,
+				B68303042478F71B000F72B1 /* NoRx */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B6830326247979AE000F72B1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B683031C24794650000F72B1 /* RxGithubSearchMVVMViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
