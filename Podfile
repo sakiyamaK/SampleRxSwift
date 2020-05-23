@@ -9,6 +9,9 @@ target 'SampleRxSwift' do
   pod 'R.swift'
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'Alamofire'
+  pod 'NSObject+Rx'
+  pod 'RxOptional'
 
   target 'SampleRxSwiftTests' do
     inherit! :search_paths
