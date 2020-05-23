@@ -55,16 +55,13 @@ final class RxGithubSearchMVVMViewModel: RxGithubSearchMVVMViewModelInput, RxGit
     Observable.combineLatest(
       _searchText,
       _sortType
-    ).subscribe(onNext: { (searchWord, sortType) -> Void in
-      GithubAPI.shared.get(searchWord: searchWord, isDesc: sortType, success: {[weak self] (models) in
-        //最後に得たデータを保存
-        self?.models = models
-        //値が更新したことを告げるためだけのストリームなので流れる値はvoid
-        self?._changeModelsObservable.accept(())
-      }) { (error) in
-        guard let _error = error else { return }
-        debugPrint(_error)
-      }
-    }).disposed(by: disposeBag)    
+    ).flatMapLatest({ (searchWord, sortType) -> Observable<[GithubModel]> in
+      GithubAPI.shared.rx.get(searchWord: searchWord, isDesc: sortType)
+    }).map {[weak self] (models) -> Void in
+      //最後に得たデータを保存
+      self?.models = models
+      //値が更新したことを告げるためだけのストリームを流すのでVoidにする
+      return
+    }.bind(to: _changeModelsObservable).disposed(by: disposeBag)
   }
 }

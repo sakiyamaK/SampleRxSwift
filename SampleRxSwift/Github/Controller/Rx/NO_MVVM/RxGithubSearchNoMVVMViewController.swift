@@ -34,7 +34,7 @@ final class RxGithubSearchNoMVVMViewController: UIViewController, HasDisposeBag 
     //であればテキストをストリームに流す
     let searchTextObservable = urlTextField.rx.text
       .debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
-      .distinctUntilChanged().filterNil().filter { $0.count > 0 }
+      .distinctUntilChanged().filterNil()
 
     //ソートのストリーム (2)
     //初回読み込み時または変化があれば
@@ -48,15 +48,25 @@ final class RxGithubSearchNoMVVMViewController: UIViewController, HasDisposeBag 
     Observable.combineLatest(
       searchTextObservable,
       sortTypeObservable
-    ).subscribe(onNext: { (searchWord, sortType) -> Void in
-      GithubAPI.shared.get(searchWord: searchWord, isDesc: sortType, success: {[weak self] (models) in
+    ).flatMapLatest({ (searchWord, sortType) -> Observable<[GithubModel]> in
+      GithubAPI.shared.rx.get(searchWord: searchWord, isDesc: sortType)
+    }).subscribeOn(MainScheduler.instance)
+      .subscribe(onNext: {[weak self] (models) in
         self?.responseData = models
         self?.tableView.reloadData()
-      }) { (error) in
-        guard let _error = error else { return }
-        debugPrint(_error)
-      }
-    }).disposed(by: disposeBag)
+        }, onError: { error in
+          print(error.localizedDescription)
+      }).disposed(by: disposeBag)
+
+    //この書き方だとUITableViewDataSourceすらいらなくなるがtableviewの警告が出た
+    //    Observable.combineLatest(
+    //      searchTextObservable,
+    //      sortTypeObservable
+    //    ).flatMapLatest({ (searchWord, sortType) -> Observable<[GithubModel]> in
+    //      GithubAPI.shared.rx.get(searchWord: searchWord, isDesc: sortType)
+    //    }).subscribeOn(MainScheduler.instance).bind(to: self.tableView.rx.items(cellIdentifier: "Cell", cellType: GithubTableViewCell.self)){(row, element, cell) in
+    //      cell.configure(githubModel: element)
+    //    }.disposed(by: disposeBag)
   }
 }
 

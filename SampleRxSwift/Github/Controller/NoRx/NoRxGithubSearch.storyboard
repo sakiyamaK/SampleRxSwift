@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tRH-EX-eJX">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="52" width="414" height="810"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VXo-hT-CD6">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="34"/>
@@ -52,7 +52,7 @@
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8hT-Yx-Fpq">
-                                        <rect key="frame" x="0.0" y="42" width="414" height="776"/>
+                                        <rect key="frame" x="0.0" y="42" width="414" height="768"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <connections>
                                             <outlet property="dataSource" destination="mkL-dw-9Dp" id="P80-xS-Ahy"/>
@@ -64,7 +64,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="tRH-EX-eJX" firstAttribute="leading" secondItem="CWw-sD-bWZ" secondAttribute="leading" id="PZt-mi-cyF"/>
-                            <constraint firstItem="tRH-EX-eJX" firstAttribute="top" secondItem="CWw-sD-bWZ" secondAttribute="top" id="Pv4-2J-q2O"/>
+                            <constraint firstItem="tRH-EX-eJX" firstAttribute="top" secondItem="CWw-sD-bWZ" secondAttribute="top" constant="8" id="Pv4-2J-q2O"/>
                             <constraint firstItem="CWw-sD-bWZ" firstAttribute="bottom" secondItem="tRH-EX-eJX" secondAttribute="bottom" id="hno-QU-LYy"/>
                             <constraint firstItem="tRH-EX-eJX" firstAttribute="trailing" secondItem="CWw-sD-bWZ" secondAttribute="trailing" id="knP-dB-AoW"/>
                         </constraints>

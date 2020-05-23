@@ -46,7 +46,7 @@ final class RxGithubSearchMVVMViewController: UIViewController, HasDisposeBag {
     //であればテキストをストリームに流す
     let searchTextObservable = urlTextField.rx.text
       .debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
-      .distinctUntilChanged().filterNil().filter { $0.count > 0 }
+      .distinctUntilChanged().filterNil()
 
     //ソートのストリーム (2)
     //初回読み込み時または変化があれば
@@ -64,8 +64,10 @@ final class RxGithubSearchMVVMViewController: UIViewController, HasDisposeBag {
   //viewModelからくるストリーム
   private func bindOutputStream() {
     //outputの「modelsに変化があったよ」というストリームが流れてきたらテーブルを更新
-    output.changeModelsObservable.subscribeOn(MainScheduler.instance).subscribe(onNext: { (_) in
+    output.changeModelsObservable.subscribeOn(MainScheduler.instance).subscribe(onNext: {
       self.tableView.reloadData()
+    }, onError: { error in
+      print(error.localizedDescription)
     }).disposed(by: disposeBag)
   }
 }
