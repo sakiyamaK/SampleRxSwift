@@ -27,6 +27,8 @@
 		B6830319247945D4000F72B1 /* RxGithubSearchMVVM.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6830318247945D4000F72B1 /* RxGithubSearchMVVM.storyboard */; };
 		B683031B247945DB000F72B1 /* RxGithubSearchMVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683031A247945DB000F72B1 /* RxGithubSearchMVVMViewController.swift */; };
 		B683031D24794650000F72B1 /* RxGithubSearchMVVMViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683031C24794650000F72B1 /* RxGithubSearchMVVMViewModel.swift */; };
+		B683031F247950D9000F72B1 /* NoRxGithubSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B683031E247950D9000F72B1 /* NoRxGithubSearch.storyboard */; };
+		B68303212479513C000F72B1 /* NoRxGithubSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68303202479513C000F72B1 /* NoRxGithubSearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,8 @@
 		B6830318247945D4000F72B1 /* RxGithubSearchMVVM.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RxGithubSearchMVVM.storyboard; sourceTree = "<group>"; };
 		B683031A247945DB000F72B1 /* RxGithubSearchMVVMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxGithubSearchMVVMViewController.swift; sourceTree = "<group>"; };
 		B683031C24794650000F72B1 /* RxGithubSearchMVVMViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxGithubSearchMVVMViewModel.swift; sourceTree = "<group>"; };
+		B683031E247950D9000F72B1 /* NoRxGithubSearch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NoRxGithubSearch.storyboard; sourceTree = "<group>"; };
+		B68303202479513C000F72B1 /* NoRxGithubSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoRxGithubSearchViewController.swift; sourceTree = "<group>"; };
 		BA7DD6A2EE64FD8C6BF114D6 /* Pods-SampleRxSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleRxSwiftTests.debug.xcconfig"; path = "Target Support Files/Pods-SampleRxSwiftTests/Pods-SampleRxSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -202,6 +206,8 @@
 		B68303042478F71B000F72B1 /* NoRx */ = {
 			isa = PBXGroup;
 			children = (
+				B683031E247950D9000F72B1 /* NoRxGithubSearch.storyboard */,
+				B68303202479513C000F72B1 /* NoRxGithubSearchViewController.swift */,
 			);
 			path = NoRx;
 			sourceTree = "<group>";
@@ -365,6 +371,7 @@
 				B61ED381243A215B005DED5C /* Assets.xcassets in Resources */,
 				B61ED37F243A215A005DED5C /* Main.storyboard in Resources */,
 				B68303072478F743000F72B1 /* RxGithubSearchNoMVVM.storyboard in Resources */,
+				B683031F247950D9000F72B1 /* NoRxGithubSearch.storyboard in Resources */,
 				B6830319247945D4000F72B1 /* RxGithubSearchMVVM.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -498,6 +505,7 @@
 				B683031724794430000F72B1 /* GithubTableViewCell.swift in Sources */,
 				B683030F24790F8F000F72B1 /* GithubModel.swift in Sources */,
 				B68303092479058A000F72B1 /* RxGithubSearchNoMVVMViewController.swift in Sources */,
+				B68303212479513C000F72B1 /* NoRxGithubSearchViewController.swift in Sources */,
 				B683031B247945DB000F72B1 /* RxGithubSearchMVVMViewController.swift in Sources */,
 				B61ED378243A215A005DED5C /* AppDelegate.swift in Sources */,
 				B683030D247906A1000F72B1 /* GithubAPI.swift in Sources */,

@@ -25,18 +25,26 @@ final class RxGithubSearchNoMVVMViewController: UIViewController, HasDisposeBag 
 
   var responseData: [GithubModel] = []
 
+  //viewDidLoadで必要なストリームを決める
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    //文字列のストリーム (1)
+    //0.5sec以上,変化している,nilでない,文字数0以上
+    //であればテキストをストリームに流す
     let searchTextObservable = urlTextField.rx.text
       .debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
       .distinctUntilChanged().filterNil().filter { $0.count > 0 }
 
+    //ソートのストリーム (2)
+    //初回読み込み時または変化があれば
+    //sortTypeSegmentedControlのindexをストリームに流す
     let sortTypeObservable = Observable.merge(
       Observable.just(sortTypeSegmentedControl.selectedSegmentIndex),
       sortTypeSegmentedControl.rx.controlEvent(.valueChanged).map { self.sortTypeSegmentedControl.selectedSegmentIndex }
     ).map { $0 == 0 }
 
+    //(1),(2)を合成してストリームに値がきたらAPIを叩いてテーブルをリロード
     Observable.combineLatest(
       searchTextObservable,
       sortTypeObservable

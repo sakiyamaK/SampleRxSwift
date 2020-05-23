@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mkL-dw-9Dp">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--No Rx Github Search View Controller-->
+        <scene sceneID="kd3-n4-U2A">
+            <objects>
+                <viewController id="mkL-dw-9Dp" customClass="NoRxGithubSearchViewController" customModule="SampleRxSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nZi-SD-nhK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tRH-EX-eJX">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VXo-hT-CD6">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="34"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="PIQ-KO-JDm">
+                                                <rect key="frame" x="8" y="0.0" width="398" height="34"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gBu-3U-2nt">
+                                                        <rect key="frame" x="0.0" y="0.0" width="291" height="34"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dj3-3N-Qbg">
+                                                        <rect key="frame" x="307" y="0.0" width="91" height="35"/>
+                                                        <segments>
+                                                            <segment title="昇順"/>
+                                                            <segment title="降順"/>
+                                                        </segments>
+                                                        <connections>
+                                                            <action selector="changeSortType:" destination="mkL-dw-9Dp" eventType="valueChanged" id="Ia2-my-Ldi"/>
+                                                        </connections>
+                                                    </segmentedControl>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="PIQ-KO-JDm" firstAttribute="leading" secondItem="VXo-hT-CD6" secondAttribute="leading" constant="8" id="2Q7-g6-Oeb"/>
+                                            <constraint firstAttribute="bottom" secondItem="PIQ-KO-JDm" secondAttribute="bottom" id="AKj-Z0-BiB"/>
+                                            <constraint firstAttribute="trailing" secondItem="PIQ-KO-JDm" secondAttribute="trailing" constant="8" id="Od6-a0-wfa"/>
+                                            <constraint firstItem="PIQ-KO-JDm" firstAttribute="top" secondItem="VXo-hT-CD6" secondAttribute="top" id="weq-NH-mko"/>
+                                        </constraints>
+                                    </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8hT-Yx-Fpq">
+                                        <rect key="frame" x="0.0" y="42" width="414" height="776"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="mkL-dw-9Dp" id="P80-xS-Ahy"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="tRH-EX-eJX" firstAttribute="leading" secondItem="CWw-sD-bWZ" secondAttribute="leading" id="PZt-mi-cyF"/>
+                            <constraint firstItem="tRH-EX-eJX" firstAttribute="top" secondItem="CWw-sD-bWZ" secondAttribute="top" id="Pv4-2J-q2O"/>
+                            <constraint firstItem="CWw-sD-bWZ" firstAttribute="bottom" secondItem="tRH-EX-eJX" secondAttribute="bottom" id="hno-QU-LYy"/>
+                            <constraint firstItem="tRH-EX-eJX" firstAttribute="trailing" secondItem="CWw-sD-bWZ" secondAttribute="trailing" id="knP-dB-AoW"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="CWw-sD-bWZ"/>
+                    </view>
+                    <connections>
+                        <outlet property="sortTypeSegmentedControl" destination="dj3-3N-Qbg" id="Uw7-PK-xfg"/>
+                        <outlet property="tableView" destination="8hT-Yx-Fpq" id="OYf-zZ-zE0"/>
+                        <outlet property="urlTextField" destination="gBu-3U-2nt" id="pXV-WC-F8e"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aLJ-WJ-mYG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="33" y="123"/>
+        </scene>
+    </scenes>
+</document>
