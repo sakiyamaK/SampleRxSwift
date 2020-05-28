@@ -7,9 +7,11 @@ target 'SampleRxSwift' do
 
   # Pods for SampleRxSwift
   pod 'R.swift'
+  pod 'Alamofire'
+
   pod 'RxSwift'
   pod 'RxCocoa'
-  pod 'Alamofire'
+
   pod 'NSObject+Rx'
   pod 'RxOptional'
 

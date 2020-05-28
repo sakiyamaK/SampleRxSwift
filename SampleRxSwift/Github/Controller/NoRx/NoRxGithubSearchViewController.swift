@@ -12,6 +12,7 @@ final class NoRxGithubSearchViewController: UIViewController {
 
   private var start = Date()
   private var preText: String = ""
+
   @IBOutlet private weak var urlTextField: UITextField!
 
   @IBOutlet private weak var tableView: UITableView! {

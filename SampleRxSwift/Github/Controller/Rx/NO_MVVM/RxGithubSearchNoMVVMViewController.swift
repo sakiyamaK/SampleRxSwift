@@ -7,8 +7,10 @@
 //
 
 import UIKit
+
 import RxSwift
 import RxCocoa
+
 import NSObject_Rx
 import RxOptional
 
@@ -29,6 +31,7 @@ final class RxGithubSearchNoMVVMViewController: UIViewController, HasDisposeBag 
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    //----------------
     //文字列のストリーム (1)
     //0.5sec以上,変化している,nilでない,文字数0以上
     //であればテキストをストリームに流す
@@ -45,28 +48,31 @@ final class RxGithubSearchNoMVVMViewController: UIViewController, HasDisposeBag 
     ).map { $0 == 0 }
 
     //(1),(2)を合成してストリームに値がきたらAPIを叩いてテーブルをリロード
-    Observable.combineLatest(
+    let getAPIObservable = Observable.combineLatest(
       searchTextObservable,
       sortTypeObservable
     ).flatMapLatest({ (searchWord, sortType) -> Observable<[GithubModel]> in
       GithubAPI.shared.rx.get(searchWord: searchWord, isDesc: sortType)
-    }).subscribeOn(MainScheduler.instance)
+    })
+    //-------------------
+
+    //------------------
+    //購買する
+    getAPIObservable
+      .subscribeOn(MainScheduler.instance)
       .subscribe(onNext: {[weak self] (models) in
         self?.responseData = models
         self?.tableView.reloadData()
         }, onError: { error in
           print(error.localizedDescription)
       }).disposed(by: disposeBag)
+    //------------------
 
     //この書き方だとUITableViewDataSourceすらいらなくなるがtableviewの警告が出た
-    //    Observable.combineLatest(
-    //      searchTextObservable,
-    //      sortTypeObservable
-    //    ).flatMapLatest({ (searchWord, sortType) -> Observable<[GithubModel]> in
-    //      GithubAPI.shared.rx.get(searchWord: searchWord, isDesc: sortType)
-    //    }).subscribeOn(MainScheduler.instance).bind(to: self.tableView.rx.items(cellIdentifier: "Cell", cellType: GithubTableViewCell.self)){(row, element, cell) in
-    //      cell.configure(githubModel: element)
-    //    }.disposed(by: disposeBag)
+//    getAPIObservable.subscribeOn(MainScheduler.instance)
+//      .bind(to: self.tableView.rx.items(cellIdentifier: "Cell", cellType: GithubTableViewCell.self)){(row, element, cell) in
+//          cell.configure(githubModel: element)
+//        }.disposed(by: disposeBag)
   }
 }
 
@@ -79,7 +85,7 @@ extension RxGithubSearchNoMVVMViewController: UITableViewDataSource {
     guard
       let githubModel = responseData[safe: indexPath.item],
       let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? GithubTableViewCell
-    else { return UITableViewCell() }
+      else { return UITableViewCell() }
     cell.configure(githubModel: githubModel)
     return cell
   }
