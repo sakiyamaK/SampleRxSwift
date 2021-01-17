@@ -45,7 +45,7 @@ final class RxGithubSearchMVVMViewController: UIViewController {
     //であればテキストをストリームに流す
     let searchTextObservable = urlTextField.rx.text
       .debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
-      .distinctUntilChanged().filterNil()
+      .distinctUntilChanged().filterNil().filter { $0.isNotEmpty }
 
     //ソートのストリーム (2)
     //初回読み込み時または変化があれば

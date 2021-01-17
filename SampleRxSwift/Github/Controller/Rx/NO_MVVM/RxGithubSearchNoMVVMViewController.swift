@@ -38,6 +38,7 @@ final class RxGithubSearchNoMVVMViewController: UIViewController {
       .debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
       .distinctUntilChanged()
       .filterNil()
+      .filter { $0.isNotEmpty }
 
     //ソートのストリーム (2)
     //初回読み込み時または変化があれば
@@ -72,7 +73,7 @@ final class RxGithubSearchNoMVVMViewController: UIViewController {
 //    getAPIObservable.subscribeOn(MainScheduler.instance)
 //      .bind(to: self.tableView.rx.items(cellIdentifier: "Cell", cellType: GithubTableViewCell.self)){(row, element, cell) in
 //          cell.configure(githubModel: element)
-//        }.disposed(by: disposeBag)
+//      }.disposed(by: rx.disposeBag)
   }
 }
 
