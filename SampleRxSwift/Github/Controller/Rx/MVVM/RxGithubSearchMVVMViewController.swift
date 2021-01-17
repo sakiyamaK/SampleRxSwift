@@ -9,10 +9,9 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import NSObject_Rx
 import RxOptional
 
-final class RxGithubSearchMVVMViewController: UIViewController, HasDisposeBag {
+final class RxGithubSearchMVVMViewController: UIViewController {
 
   @IBOutlet private weak var urlTextField: UITextField!
 
@@ -57,8 +56,14 @@ final class RxGithubSearchMVVMViewController: UIViewController, HasDisposeBag {
     ).map { $0 == 0 }
 
     //inputのプロパティと繋げる (bindはそのまま値をストリームに流す
-    searchTextObservable.bind(to: input.searchTextObserver).disposed(by: disposeBag)
-    sortTypeObservable.bind(to: input.sortTypeObserver).disposed(by: disposeBag)
+    searchTextObservable.bind(to: input.searchTextObserver).disposed(by: rx.disposeBag)
+    sortTypeObservable.bind(to: input.sortTypeObserver).disposed(by: rx.disposeBag)
+
+    //もしくは一括で登録
+//    rx.disposeBag([
+//      searchTextObservable.bind(to: input.searchTextObserver),
+//      sortTypeObservable.bind(to: input.sortTypeObserver)
+//    ])
   }
 
   //viewModelからくるストリーム
@@ -68,7 +73,12 @@ final class RxGithubSearchMVVMViewController: UIViewController, HasDisposeBag {
       self.tableView.reloadData()
     }, onError: { error in
       print(error.localizedDescription)
-    }).disposed(by: disposeBag)
+    }).disposed(by: rx.disposeBag)
+
+    //もしくはBinderで記述
+//    output.changeModelsObservable.bind(to: Binder(self) {(vc, _) in
+//      vc.tableView.reloadData()
+//    }).disposed(by: rx.disposeBag)
   }
 }
 

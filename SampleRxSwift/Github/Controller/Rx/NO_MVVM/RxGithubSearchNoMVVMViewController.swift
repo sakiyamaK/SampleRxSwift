@@ -11,10 +11,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-import NSObject_Rx
 import RxOptional
 
-final class RxGithubSearchNoMVVMViewController: UIViewController, HasDisposeBag {
+final class RxGithubSearchNoMVVMViewController: UIViewController {
   
   @IBOutlet private weak var urlTextField: UITextField!
   @IBOutlet private weak var tableView: UITableView! {
@@ -37,7 +36,8 @@ final class RxGithubSearchNoMVVMViewController: UIViewController, HasDisposeBag 
     //であればテキストをストリームに流す
     let searchTextObservable = urlTextField.rx.text
       .debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
-      .distinctUntilChanged().filterNil()
+      .distinctUntilChanged()
+      .filterNil()
 
     //ソートのストリーム (2)
     //初回読み込み時または変化があれば
@@ -65,7 +65,7 @@ final class RxGithubSearchNoMVVMViewController: UIViewController, HasDisposeBag 
         self?.tableView.reloadData()
         }, onError: { error in
           print(error.localizedDescription)
-      }).disposed(by: disposeBag)
+        }).disposed(by: rx.disposeBag)
     //------------------
 
     //この書き方だとUITableViewDataSourceすらいらなくなるがtableviewの警告が出た
