@@ -16,12 +16,14 @@ import RxOptional
 final class RxGithubSearchNoMVVMViewController: UIViewController {
   
   @IBOutlet private weak var urlTextField: UITextField!
+
   @IBOutlet private weak var tableView: UITableView! {
     didSet {
       let cell = UINib(nibName: "GithubTableViewCell", bundle: nil)
       tableView.register(cell, forCellReuseIdentifier: "Cell")
     }
   }
+  
   @IBOutlet private weak var sortTypeSegmentedControl: UISegmentedControl!
 
   var responseData: [GithubModel] = []
@@ -44,8 +46,12 @@ final class RxGithubSearchNoMVVMViewController: UIViewController {
     //初回読み込み時または変化があれば
     //sortTypeSegmentedControlのindexをストリームに流す
     let sortTypeObservable = Observable.merge(
+
       Observable.just(sortTypeSegmentedControl.selectedSegmentIndex),
-      sortTypeSegmentedControl.rx.controlEvent(.valueChanged).map { self.sortTypeSegmentedControl.selectedSegmentIndex }
+
+      sortTypeSegmentedControl.rx.controlEvent(.valueChanged).map { self.sortTypeSegmentedControl.selectedSegmentIndex
+      }
+
     ).map { $0 == 0 }
 
     //(1),(2)を合成してストリームに値がきたらAPIを叩いてテーブルをリロード
