@@ -50,6 +50,7 @@ final class RxGithubSearchMVVMViewModel: RxGithubSearchMVVMViewModelInput, RxGit
     
     //初期化時にストリームを決める
     init() {
+        
         //入力のを合成してストリームに値がきたらAPIを叩いて
         //出力に値を保存して,出力にストリームを流す
         Observable.combineLatest(

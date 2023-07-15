@@ -64,15 +64,15 @@ final class RxGithubSearchNoMVVMViewController: UIViewController {
         
         //------------------
         //購買する
-//        getAPIObservable
-//            .subscribe(on: MainScheduler.instance)
-//            .subscribe(onNext: {[weak self] (models) in
-//                self?.responseData = models
-//                self?.tableView.reloadData()
-//            }, onError: { error in
-//                print(error.localizedDescription)
-//            })
-//            .disposed(by: rx.disposeBag)
+        getAPIObservable
+            .subscribe(on: MainScheduler.instance)
+            .subscribe(onNext: {[weak self] (models) in
+                self?.responseData = models
+                self?.tableView.reloadData()
+            }, onError: { error in
+                print(error.localizedDescription)
+            })
+            .disposed(by: rx.disposeBag)
         //------------------
         
         //この書き方だとUITableViewDataSourceすらいらなくなるがtableviewの警告が出た

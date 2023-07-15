@@ -55,8 +55,8 @@ final class RxGithubSearchMVVMViewController: UIViewController {
         ).map { $0 == 0 }
         
         //inputのプロパティと繋げる (bindはそのまま値をストリームに流す
-        //    searchTextObservable.bind(to: input.searchTextObserver).disposed(by: rx.disposeBag)
-        //    sortTypeObservable.bind(to: input.sortTypeObserver).disposed(by: rx.disposeBag)
+//        searchTextObservable.bind(to: input.searchTextObserver).disposed(by: rx.disposeBag)
+//        sortTypeObservable.bind(to: input.sortTypeObserver).disposed(by: rx.disposeBag)
         
         //もしくは一括で登録
         rx.disposeBag.insert([
