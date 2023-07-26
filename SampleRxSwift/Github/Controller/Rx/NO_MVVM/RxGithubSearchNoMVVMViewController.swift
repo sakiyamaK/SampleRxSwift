@@ -26,7 +26,7 @@ final class RxGithubSearchNoMVVMViewController: UIViewController {
     
     @IBOutlet private weak var sortTypeSegmentedControl: UISegmentedControl!
     
-    var responseData: [GithubModel] = []
+    private var responseData: [GithubModel] = []
     
     //viewDidLoadで必要なストリームを決める
     override func viewDidLoad() {
@@ -36,7 +36,7 @@ final class RxGithubSearchNoMVVMViewController: UIViewController {
         //文字列のストリーム (1)
         //0.5sec以上,変化している,nilでない,文字数0以上
         //であればテキストをストリームに流す
-        let searchTextObservable = urlTextField.rx.text
+        let searchTextObservable: Observable<String> = urlTextField.rx.text
             .debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .filterNil()
@@ -45,7 +45,7 @@ final class RxGithubSearchNoMVVMViewController: UIViewController {
         //ソートのストリーム (2)
         //初回読み込み時または変化があれば
         //sortTypeSegmentedControlのindexをストリームに流す
-        let sortTypeObservable = Observable.merge(
+        let sortTypeObservable: Observable<Bool> = Observable.merge(
             
             Observable.just(sortTypeSegmentedControl.selectedSegmentIndex),
             
@@ -66,20 +66,19 @@ final class RxGithubSearchNoMVVMViewController: UIViewController {
         //購買する
         getAPIObservable
             .subscribe(on: MainScheduler.instance)
-            .subscribe(onNext: {[weak self] (models) in
+            .subscribe(onNext: {[weak self] models in
                 self?.responseData = models
                 self?.tableView.reloadData()
             }, onError: { error in
                 print(error.localizedDescription)
-            })
-            .disposed(by: rx.disposeBag)
+            }).disposed(by: rx.disposeBag)
         //------------------
         
         //この書き方だとUITableViewDataSourceすらいらなくなるがtableviewの警告が出た
-//            getAPIObservable.subscribe(on: MainScheduler.instance)
-//              .bind(to: self.tableView.rx.items(cellIdentifier: "Cell", cellType: GithubTableViewCell.self)){(row, element, cell) in
-//                  cell.configure(githubModel: element)
-//              }.disposed(by: rx.disposeBag)
+//        getAPIObservable
+//          .bind(to: self.tableView.rx.items(cellIdentifier: "Cell", cellType: GithubTableViewCell.self)){(row, element, cell) in
+//              cell.configure(githubModel: element)
+//          }.disposed(by: rx.disposeBag)
     }
 }
 

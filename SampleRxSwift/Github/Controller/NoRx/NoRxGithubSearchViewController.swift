@@ -24,7 +24,7 @@ final class NoRxGithubSearchViewController: UIViewController {
 
   @IBOutlet private weak var sortTypeSegmentedControl: UISegmentedControl!
 
-  var responseData: [GithubModel] = []
+  private var responseData: [GithubModel] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -53,7 +53,7 @@ final class NoRxGithubSearchViewController: UIViewController {
     //前回と違う文字列か
     //前回の取得から0.5sec以上経ったか
     guard
-      let searchWord = textField.text, searchWord.count > 0,
+        let searchWord = textField.text, !searchWord.isEmpty,
       searchWord != preText, Date().timeIntervalSince(start) > 0.5
     else { return }
     //ソートタイプは昇順か
@@ -68,7 +68,7 @@ final class NoRxGithubSearchViewController: UIViewController {
     //前回と違う文字列か
     //前回の取得から0.5sec以上経ったか
     guard
-      let searchWord = self.urlTextField.text, searchWord.count > 0,
+        let searchWord = self.urlTextField.text, !searchWord.isEmpty,
       searchWord != preText, Date().timeIntervalSince(start) > 0.5
     else { return }
     //ソートタイプは昇順か
